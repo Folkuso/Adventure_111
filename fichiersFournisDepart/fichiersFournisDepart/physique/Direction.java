@@ -36,7 +36,6 @@ public class Direction {
 		return direction;
 	}
 	
-	
 	public static Position directionAPosition(int direction) {
 		
 		Position p = new Position();
