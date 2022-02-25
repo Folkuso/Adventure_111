@@ -7,7 +7,7 @@ public class Case {
 	
 	private boolean decouverte; //indique si la case a été découverte par le héros
 	private boolean finNiveau; //indique si la case est la fin d'un niveau
-	private boolean deAlgoLaby; //indique si la case a été développée par l'algorithme du labyrinthe
+	private boolean developpe; //indique si la case a été développée par l'algorithme du labyrinthe
 	
 	Case voisin[] = new Case[4]; //contient les références sur les voisins connectés
 	
@@ -25,7 +25,7 @@ public class Case {
 		
 		return copiePosition;
 	}
-
+	
 	public boolean estDecouverte() //Indique si la case est découverte ou non
 	{
 		return decouverte;
@@ -46,14 +46,14 @@ public class Case {
 		this.finNiveau = finNiveau;
 	}
 
-	public boolean estDeAlgoLaby() //Indique si la case a été développée
+	public boolean estDeveloppe() //Indique si la case a été développée
 	{
-		return deAlgoLaby;
+		return developpe;
 	}
 
-	public void setDeAlgoLaby(boolean deAlgoLaby) //Mutateur (écriture) de l'attribut deAlgoLaby (si la case a été développée)
+	public void setDeveloppe(boolean deAlgoLaby) //Mutateur (écriture) de l'attribut deAlgoLaby (si la case a été développée)
 	{
-		this.deAlgoLaby = deAlgoLaby;
+		this.developpe = deAlgoLaby;
 	}
 	
 	public void setVoisin(int direction) //Défini la position du voisin selon la position actuelle du joueur
@@ -65,4 +65,17 @@ public class Case {
 		voisin[direction].casePosition = voisinP;
 		
 	}
+	
+	public Case getVoisin(int direction) {
+		return voisin[direction];
+	}
+	
+	public String toString()
+	{
+		return "Position: [ "+this.casePosition.getI()+"] i"+"["+this.casePosition.getJ()+"] j"
+				+"\nDécouverte par le Hero: "+this.estDecouverte()
+				+"\nFin du niveau: "+this.estFinNiveau()
+				+"\nDéveloppée par l'algorithme: "+this.estDeveloppe();
+	}
+	
 }
