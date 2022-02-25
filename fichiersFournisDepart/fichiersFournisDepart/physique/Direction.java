@@ -4,15 +4,15 @@ import java.util.Random;
 
 public class Direction {
 	
-	public final int HAUT = 0;
-	public final int BAS = 1;
-	public final int GAUCHE = 2;
-	public final int DROITE = 3;
+	public static final int HAUT = 0;
+	public static final int BAS = 1;
+	public static final int GAUCHE = 2;
+	public static final int DROITE = 3;
 
 
-	Random nbrAleat = new Random();
+	static Random nbrAleat = new Random();
 	
-	public int directionOpposee(int direction) {
+	public static int directionOpposee(int direction) {
 		
 		//ne sait pas si peut retourner meme variable ou doit retourner une nouvelle
 		
@@ -37,7 +37,7 @@ public class Direction {
 	}
 	
 	
-	public Position directionAPosition(int direction) {
+	public static Position directionAPosition(int direction) {
 		
 		Position p = new Position();
 		
@@ -66,7 +66,7 @@ public class Direction {
 	}
 	
 
-	public int positionADirection(Position p) {
+	public static int positionADirection(Position p) {
 		
 		int direction;
 		
@@ -85,7 +85,7 @@ public class Direction {
 		return direction;
 	}
 	
-	public int obtenirDirAlea(){
+	public static int obtenirDirAlea(){
 		
 		int direction;
 		
