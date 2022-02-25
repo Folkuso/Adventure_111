@@ -61,6 +61,7 @@ public class Case {
 		Position voisinP = new Position(this.casePosition);
 		
 		voisinP.additionnerPos(Direction.directionAPosition(direction));
+		
 		voisin[direction].casePosition = voisinP;
 		
 	}
