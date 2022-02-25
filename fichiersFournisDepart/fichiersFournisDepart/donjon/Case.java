@@ -1,29 +1,24 @@
 package donjon;
-
 import physique.*;
 
 public class Case {
 
-	private Position casePosition;
+	private Position casePosition; //référence à une position
 	
-	private boolean decouverte;
-	private boolean finNiveau;
-	private boolean deAlgoLaby;
+	private boolean decouverte; //indique si la case a été découverte par le héros
+	private boolean finNiveau; //indique si la case est la fin d'un niveau
+	private boolean deAlgoLaby; //indique si la case a été développée par l'algorithme du labyrinthe
 	
-	Case voisin[] = new Case[4];
+	Case voisin[] = new Case[4]; //contient les références sur les voisins connectés
 	
-	
-	public Case(Position p) {
-		
+	//Constructeur avec paramètres
+	public Case(Position p) //Reçoit une référence à une position
+	{
 		casePosition = new Position(p);
-		
-		
-		
-		
 	}
 	
-	public Position getCopiePosition() {
-		
+	public Position getCopiePosition() //Obtient une copie de la position membre
+	{
 		Position copiePosition;
 		
 		copiePosition = new Position(casePosition);
@@ -31,33 +26,38 @@ public class Case {
 		return copiePosition;
 	}
 
-	public boolean estDecouverte() {
+	public boolean estDecouverte() //Indique si la case est découverte ou non
+	{
 		return decouverte;
 	}
 
-	public void setDecouverte(boolean decouverte) {
+	public void setDecouverte(boolean decouverte) //Mutateur (écriture) de l'attribut découverte
+	{
 		this.decouverte = decouverte;
 	}
 
-	public boolean estFinNiveau() {
+	public boolean estFinNiveau() //Indique si c'est la fin du niveau
+	{
 		return finNiveau;
 	}
 
-	public void setFinNiveau(boolean finNiveau) {
+	public void setFinNiveau(boolean finNiveau) //Mutateur (écriture) de l'attribut finNiveau
+	{
 		this.finNiveau = finNiveau;
 	}
 
-	public boolean estDeAlgoLaby() {
+	public boolean estDeAlgoLaby() //Indique si la case a été développée
+	{
 		return deAlgoLaby;
 	}
 
-	public void setDeAlgoLaby(boolean deAlgoLaby) {
+	public void setDeAlgoLaby(boolean deAlgoLaby) //Mutateur (écriture) de l'attribut deAlgoLaby (si la case a été développée)
+	{
 		this.deAlgoLaby = deAlgoLaby;
 	}
 	
-	public void setVoisin(int direction) {
-		
-		
+	public void setVoisin(int direction) //Défini la position du voisin selon la position actuelle du joueur
+	{
 		Position voisinP = new Position(this.casePosition);
 		
 		voisinP.additionnerPos(Direction.directionAPosition(direction));
@@ -65,6 +65,4 @@ public class Case {
 		voisin[direction].casePosition = voisinP;
 		
 	}
-	
-	
 }
