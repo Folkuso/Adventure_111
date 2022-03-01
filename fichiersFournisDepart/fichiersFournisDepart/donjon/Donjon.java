@@ -45,11 +45,28 @@ public class Donjon {
 	
 	
 	public int getNbVoisinsNonDeveloppe(Position p) {
-		int compte = 0;
+		int i, compte = 0;
+		Case aTester = new Case(p);
+		Case voisin;
+		Position copieVoisin;
+		Configuration instance = Configuration.getInstance();
+		
 		
 		//pour toutes les directions
-		//for
-			
+		for(i= 0 ; i< 4;i++)
+		{
+			aTester.setVoisin(i);
+			voisin = aTester.getVoisin(i);
+			copieVoisin = aTester.getCopiePosition();
+			if(copieVoisin.getI()>=0 && copieVoisin.getI()<instance.getConfig(Configuration.NB_LIGNES)
+					&& copieVoisin.getJ() >= 0 && copieVoisin.getJ() < instance.getConfig(Configuration.NB_COLONNES))
+			{
+				if(!voisin.estDecouverte())
+				{
+					compte++;
+				}
+			}
+		}
 		
 		return compte;
 	}
