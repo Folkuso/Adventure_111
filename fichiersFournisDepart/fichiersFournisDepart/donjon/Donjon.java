@@ -61,13 +61,12 @@ public class Donjon {
 			if(copieVoisin.getI()>=0 && copieVoisin.getI()<instance.getConfig(Configuration.NB_LIGNES)
 					&& copieVoisin.getJ() >= 0 && copieVoisin.getJ() < instance.getConfig(Configuration.NB_COLONNES))
 			{
-				if(!voisin.estDecouverte())
+				if(!voisin.estDeveloppe())
 				{
 					compte++;
 				}
 			}
-		}
-		
+		}		
 		return compte;
 	}
 }
