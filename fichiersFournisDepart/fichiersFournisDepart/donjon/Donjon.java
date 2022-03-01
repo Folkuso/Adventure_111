@@ -101,25 +101,34 @@ public class Donjon {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public Case getVoisinAlea(Position p) {
+		
+		Configuration instance = Configuration.getInstance();
+		Direction directionAlea = null;
+		Position positionAlea;
+		boolean valide = false;
+		
+		Case leVoisinAlea;
+		
+		int intDirection;
+
+		do {
+			
+		intDirection = directionAlea.obtenirDirAlea();
+		
+		positionAlea = directionAlea.directionAPosition(intDirection);
+		
+		positionAlea.additionnerPos(p);
+		
+		if(positionAlea.getI()>=0 && positionAlea.getI()<instance.getConfig(Configuration.NB_LIGNES) && positionAlea.getJ() >= 0 && positionAlea.getJ() < instance.getConfig(Configuration.NB_COLONNES)) 
+			valide = true;
+		
+		} while(!valide);
+		
+		leVoisinAlea = new Case(positionAlea);
+		
+		return leVoisinAlea;
+	}
 	
 	
 }
