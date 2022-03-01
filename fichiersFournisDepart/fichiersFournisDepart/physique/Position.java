@@ -65,7 +65,7 @@ public class Position
 		if (obj instanceof Position)
 		{
 			Position cpt = (Position) obj;
-			return this.equals(cpt);
+			return this.i == cpt.i && this.j == cpt.j;
 		}
 		else
 			return false;

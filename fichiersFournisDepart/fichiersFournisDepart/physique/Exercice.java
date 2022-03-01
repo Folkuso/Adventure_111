@@ -15,6 +15,11 @@ public class Exercice {
 		p1.clone(p);
 		System.out.println("p1 cloné : " + p1);
 		
+		p.setI(8);
+		
+		System.out.print(p.getI() + " ");
+		System.out.println(p.getJ());
+		
 		if (p1.equals(p))
 			System.out.println("C'est égal");
 		else
