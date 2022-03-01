@@ -69,4 +69,57 @@ public class Donjon {
 		}		
 		return compte;
 	}
+	
+	public Case getVoisinLibreAlea(Position p)
+	{
+		
+		int i;
+		boolean trouver = false;
+		Case aTester = new Case(p);
+		Case voisin = null;
+		Position copieVoisin;
+		Configuration instance = Configuration.getInstance();
+		
+		
+		//pour toutes les directions
+		for(i= 0 ; i< 4 && !trouver && this.getNbVoisinsNonDeveloppe(p) > 0;i++)
+		{
+			aTester.setVoisin(i);
+			voisin = aTester.getVoisin(i);
+			copieVoisin = aTester.getCopiePosition();
+			if(copieVoisin.getI()>=0 && copieVoisin.getI()<instance.getConfig(Configuration.NB_LIGNES)
+					&& copieVoisin.getJ() >= 0 && copieVoisin.getJ() < instance.getConfig(Configuration.NB_COLONNES))
+			{
+				if(!voisin.estDeveloppe())
+				{
+					trouver = true;					
+				}
+			}
+		}		
+		
+		return voisin;		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
