@@ -11,10 +11,8 @@ public class Donjon {
 	
 	Random aleatoire = new Random();
 	
-	
-	
-	
-	public Donjon() {
+	public Donjon() //Constructeur sans paramètres
+	{
 		//reference aux configurations
 		Configuration instance = Configuration.getInstance();
 		//initialise le tableau 2D a l'aide des dimensions provenant des configurations
@@ -23,9 +21,14 @@ public class Donjon {
 		//case depart choisie au hasard, 2 aleatoire 1 pour i et 1 pour j
 		caseDepart = new Case(getPositionAlea());
 		
+		// produit le labyrinthe
+		this.produireLabyrinthe();
+		// assigne la fin
+		this.caseFin.setFinNiveau(true);
 	}
 	
-	public Case[] getCaseDebutetFin() {
+	public Case[] getCaseDebutetFin() //informatrice pour case de départ et case de fin
+	{
 		Case tab[] = new Case[2];
 	
 		tab[0] = this.caseDepart;
@@ -34,17 +37,20 @@ public class Donjon {
 		return tab;
 	}
 	
-	public Case[][] getCasesJeu(){
+	public Case[][] getCasesJeu() //informatrice pour obtenir une référence sur le tableau 2D
+	{
 		return this.casesJeu;
 	}
 	
-	public Position getPositionAlea() {
+	public Position getPositionAlea() //retourne une une position, choisie aléatoirement à l’intérieur du donjon
+	{
 		Configuration instance = Configuration.getInstance();		
 		return new Position(aleatoire.nextInt(instance.getConfig(Configuration.NB_LIGNES)), aleatoire.nextInt(instance.getConfig(Configuration.NB_COLONNES)));
 	}
 	
 	
-	public int getNbVoisinsNonDeveloppe(Position p) {
+	public int getNbVoisinsNonDeveloppe(Position p) //retourne le nombre de voisins pas développé autour de la case p
+	{
 		int i, compte = 0;
 		Case aTester = new Case(p);
 		Case voisin;
@@ -70,7 +76,7 @@ public class Donjon {
 		return compte;
 	}
 	
-	public Case getVoisinLibreAlea(Position p)
+	public Case getVoisinLibreAlea(Position p) //retourne aléatoirement un voisin libre de la case p
 	{
 		
 		int i;
@@ -78,11 +84,11 @@ public class Donjon {
 		Case aTester = new Case(p);
 		Case voisin = null;
 		Position copieVoisin;
-		Configuration instance = Configuration.getInstance();
-		
+		Configuration instance = Configuration.getInstance();		
 		
 		//pour toutes les directions
-		for(i= 0 ; i< 4 && !trouver && this.getNbVoisinsNonDeveloppe(p) > 0;i++)
+		i = Direction.obtenirDirAlea();
+		while (!trouver && this.getNbVoisinsNonDeveloppe(p) > 0)
 		{
 			aTester.setVoisin(i);
 			voisin = aTester.getVoisin(i);
@@ -95,14 +101,19 @@ public class Donjon {
 					trouver = true;					
 				}
 			}
-		}		
+			
+			else
+			{
+				i = Direction.obtenirDirAlea();
+			}
+		}
 		
 		return voisin;		
 	}
 	
 	
-	public Case getVoisinAlea(Position p) {
-		
+	public Case getVoisinAlea(Position p) //retourne un voisin choisi aléatoirement (que le voisin soit développé ou pas)
+	{		
 		Configuration instance = Configuration.getInstance();
 		Direction directionAlea = null;
 		Position positionAlea;
@@ -130,5 +141,58 @@ public class Donjon {
 		return leVoisinAlea;
 	}
 	
-	
+	public void produireLabyrinthe() //crée le labyrinthe
+	{		
+		// développe le labyrinthe à partir de la case départ
+		// l'empile
+		PileSChainee p = new PileSChainee();
+		p.empiler(this.caseDepart);
+		
+		//tant que la pile n'est pas vide, continue
+		while (!p.estVide())
+		{
+			// prend la case du haut de la pile sans l’enlever
+			Case ccase = (Case)p.regarder();
+			
+			// obtient sa position
+			Position cposition = ccase.getCopiePosition();
+			
+			// indique que cette case est maintenant développée
+			ccase.setDecouverte(true);
+			
+			// vérifie si cette case a un voisin non développé
+			if (getNbVoisinsNonDeveloppe(cposition) >= 1)
+			{
+				// oui, choisit une case non développée voisine au hasard
+				Case cvoisin = getVoisinLibreAlea(cposition);
+				
+				// obtient la position du voisin
+				cvoisin.getCopiePosition();
+			
+				// calcul la direction du voisin
+				// position voisin moins position case courante
+				// -> position à direction
+			
+			
+				// ajoute à la case, comme voisin réciproque
+				// appel à setVoisin pour les deux cases
+				// note: la droite d'une case est la gauche de l'autre,
+				// utiliser directionOpposee
+			
+			
+				// ajoute le voisin à la pile
+			
+			
+				// définit la fin comme étant la dernière case développée
+				this.fin = (Case)pile.regarder();
+			}
+			
+			else
+			{
+				//sinon
+				// il s'agit d'un cul-de-sac, dépile une case
+			}
+		}
+		
+	}
 }

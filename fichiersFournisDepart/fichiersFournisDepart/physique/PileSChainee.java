@@ -38,7 +38,7 @@ public class PileSChainee {
 	{
 		Object rep =null;
 		
-		if(nbElements >1)
+		if(nbElements >0)
 		{
 			rep = this.sommet.donnee;
 		}
